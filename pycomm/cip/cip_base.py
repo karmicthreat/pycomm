@@ -186,7 +186,8 @@ UNPACK_PCCC_DATA_FUNCTION = {
     'A': unpack_sint,
     'R': unpack_dint,
     'O': unpack_int,
-    'I': unpack_int
+    'I': unpack_int,
+    'RTC': unpack_int
 }
 
 PACK_PCCC_DATA_FUNCTION = {
@@ -199,7 +200,8 @@ PACK_PCCC_DATA_FUNCTION = {
     'A': pack_sint,
     'R': pack_dint,
     'O': pack_int,
-    'I': pack_int
+    'I': pack_int,
+    'RTC': pack_int
 }
 
 def print_bytes_line(msg):

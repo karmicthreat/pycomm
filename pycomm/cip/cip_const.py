@@ -430,7 +430,8 @@ PCCC_DATA_TYPE = {
     'A': '\x8e',
     'R': '\x88',
     'O': '\x8b',
-    'I': '\x8c'
+    'I': '\x8c',
+    'RTC': '\xe4'
 }
 
 PCCC_DATA_SIZE = {
@@ -445,7 +446,8 @@ PCCC_DATA_SIZE = {
     'A': 2,
     'R': 6,
     'O': 2,
-    'I': 2
+    'I': 2,
+    'RTC': 16
 }
 
 PCCC_CT = {
@@ -459,6 +461,15 @@ PCCC_CT = {
     'OV': 12,
     'UN': 11,
     'UA': 10
+}
+
+PCCC_RTC = {
+    'YR': 0,
+    'MON': 1,
+    'DAY': 2,
+    'HR': 3,
+    'MIN': 4,
+    'SEC': 5
 }
 
 PCCC_ERROR_CODE = {

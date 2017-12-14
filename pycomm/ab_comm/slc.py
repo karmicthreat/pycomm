@@ -151,6 +151,19 @@ def parse_tag(tag):
                                       'write_func': '\xab',
                                       'address_field': 3}
 
+    t = re.search(r"(?P<file_type>RTC)(:)(?P<element_number>\d{1,3})"
+                  r"(.)(?P<sub_element>YR|MON|DAY|HR|MIN|SEC)", tag, flags=re.IGNORECASE)
+    if t:
+        if (0 <= int(t.group('element_number')) <= 255):
+            return True, t.group(0), {'file_type': t.group('file_type').upper(),
+                                      'file_number': '0',
+                                      'element_number': '0',
+                                      'sub_element': '0',
+                                      'read_func': '\xa2',
+                                      'write_func': '\xab',
+                                      'address_field': 3,
+                                      'rtc_sub_element': t.group('sub_element')}
+
     return False, tag
 
 
@@ -415,6 +428,10 @@ class Driver(Base):
                         elif bit_position == PCCC_CT['ACC']:
                             return UNPACK_PCCC_DATA_FUNCTION[res[2]['file_type']](
                                 self._reply[new_value+4:new_value+4+data_size])
+
+                    if res[2]['file_type'] == 'RTC':
+                        sub_start = new_value + (PCCC_RTC[res[2]['rtc_sub_element']] * 2)
+                        return unpack_uint(self._reply[sub_start:sub_start+2])
 
                     tag_value = UNPACK_PCCC_DATA_FUNCTION[res[2]['file_type']](
                         self._reply[new_value:new_value+data_size])
